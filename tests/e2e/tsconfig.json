@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["esnext", "dom"],
+    "types": ["cypress", "cypress-image-snapshot"]
+  }
+}

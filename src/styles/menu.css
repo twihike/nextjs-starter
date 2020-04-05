@@ -1,0 +1,60 @@
+.tk-menu-checkbox {
+  @apply hidden;
+}
+
+@screen md {
+  .tk-menu-button {
+    @apply hidden;
+  }
+}
+
+@screen md {
+  .tk-menu-overlay {
+    @apply static inset-auto z-auto;
+  }
+}
+
+.tk-menu-checkbox:checked + .tk-menu-overlay {
+  @apply fixed inset-0 z-10  bg-black opacity-25;
+}
+
+.tk-menu-nav {
+  @apply fixed top-0 right-0 z-10 w-0  bg-surface text-on-surface duration-300;
+}
+
+@screen md {
+  .tk-menu-nav {
+    @apply hidden static inset-auto z-auto;
+    transition-duration: 0ms;
+  }
+}
+
+.tk-menu-checkbox:checked + .tk-menu-overlay + .tk-menu-nav {
+  @apply w-64;
+}
+
+
+.tk-menu-nav-item {
+  @apply block p-2  text-on-surface transition-colors duration-500;
+}
+
+.tk-menu-nav-item:hover {
+  @apply bg-on-surface-state-enabled;
+}
+
+
+.tk-account-menu-checkbox {
+  @apply hidden;
+}
+
+.tk-account-menu-checkbox:checked + .tk-account-menu-overlay {
+  @apply fixed inset-0 z-10  bg-transparent opacity-25;
+}
+
+.tk-account-menu-nav {
+  @apply fixed inset-auto z-10 h-0  bg-surface text-on-surface transform scale-0 duration-300;
+}
+
+.tk-account-menu-checkbox:checked + .tk-account-menu-overlay + .tk-account-menu-nav {
+  @apply h-auto  shadow-md scale-100;
+}
