@@ -1,0 +1,19 @@
+.tk-form-text {
+  @apply border rounded py-1 px-2  text-on-surface transition-colors duration-500;
+}
+
+.tk-form-text::placeholder {
+  @apply text-on-surface-text-medium-emphasis;
+}
+
+.tk-form-text:focus {
+  @apply outline-none;
+}
+
+.tk-form-text-primary {
+  @apply border-on-surface-border;
+}
+
+.tk-form-text-primary:focus {
+  @apply border-primary;
+}

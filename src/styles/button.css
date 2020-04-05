@@ -1,0 +1,65 @@
+.tk-button {
+  @apply py-2 px-4  rounded shadow transition-colors duration-500;
+}
+
+.tk-button:focus {
+  @apply outline-none;
+}
+
+.tk-button:active {
+  @apply shadow-md;
+}
+
+.tk-button:disabled {
+  @apply cursor-default;
+}
+
+
+.tk-button-contained {
+  @apply bg-on-surface-state-enabled text-on-surface;
+}
+
+.tk-button-contained:hover {
+  @apply bg-on-surface-state-hovered;
+}
+
+.tk-button-contained:disabled {
+  @apply bg-on-surface-state-disabled;
+}
+
+
+.tk-button-contained-primary {
+  @apply bg-primary text-on-primary;
+}
+
+.tk-button-contained-primary:hover {
+  @apply bg-primary-dark;
+}
+
+
+.tk-button-circle {
+  @apply px-2 py-2  rounded-full shadow-none transition-colors duration-500;
+}
+
+.tk-button-circle:hover {
+  @apply bg-on-surface-state-hovered;
+}
+
+.tk-button-ripple {
+  @apply relative overflow-hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.tk-button-ripple::before {
+  @apply block absolute w-full h-full top-0 left-0  bg-center bg-no-repeat opacity-0 pointer-events-none;
+  content: "";
+  background-image: radial-gradient(circle, rgb(var(--color-on-surface)) 50%, transparent 51%);
+  transform: scale(2, 2);
+  transition: transform 0.5s, opacity 1s;
+}
+
+.tk-button-ripple:active::before {
+  @apply opacity-25;
+  transform: scale(0, 0);
+  transition: 0s;
+}

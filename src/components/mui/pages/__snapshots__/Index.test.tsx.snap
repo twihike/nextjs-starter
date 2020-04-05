@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="makeStyles-root-189"
+  >
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorDefault makeStyles-appBar-190 mui-fixed MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineNone makeStyles-menuTitle-191 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-noWrap"
+          href="/"
+        >
+          Next.js starter
+        </a>
+        <button
+          class="MuiButtonBase-root MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiIconButton-root"
+          data-test-id="account-icon"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-192"
+          data-test-id="menu-icon"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </header>
+    <nav
+      class="makeStyles-nav-193"
+    >
+      <div
+        class="PrivateHiddenCss-xsDown-305"
+      >
+        <div
+          class="MuiDrawer-root MuiDrawer-docked"
+        >
+          <div
+            class="MuiPaper-root MuiDrawer-paper makeStyles-drawer-194 MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+          >
+            <div
+              class="makeStyles-toolbar-198"
+            />
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                href="/"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Home
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                href="/users"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Users
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="MuiContainer-root makeStyles-container-195 MuiContainer-maxWidthLg"
+    >
+      <main
+        class="makeStyles-main-196"
+      >
+        <div
+          class="makeStyles-toolbar-198"
+        />
+        <div
+          class="jsx-3495482960 makeStyles-page-187"
+        >
+          <div
+            class="MuiPaper-root makeStyles-paper-188 MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter"
+            >
+              Welcome to Next.js starter.
+            </p>
+            <p
+              class="jsx-3495482960 csstest"
+            >
+              Style example.
+            </p>
+          </div>
+        </div>
+      </main>
+      <footer
+        class="makeStyles-footer-197"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+        >
+          Powered by 
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="https://github.com/twihike"
+          >
+            Next.js starter
+          </a>
+        </p>
+      </footer>
+    </div>
+    <nav>
+      <div
+        class="PrivateHiddenCss-smUp-307"
+      />
+    </nav>
+  </div>
+</DocumentFragment>
+`;

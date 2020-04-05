@@ -1,0 +1,24 @@
+query GetAllUsers {
+  users {
+    id
+    name
+    email
+    createdAt
+    updatedAt
+    version
+  }
+}
+
+mutation SignUp($input: SignUpInput!) {
+  signUp(input: $input) {
+    id
+    name
+    email
+  }
+}
+
+mutation SignIn($input: SignInInput!) {
+  signIn(input: $input) {
+    token
+  }
+}

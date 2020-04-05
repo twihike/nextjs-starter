@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://localhost:3001",
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "defaultCommandTimeout": 12000
+}
