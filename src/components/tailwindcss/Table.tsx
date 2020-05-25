@@ -7,6 +7,7 @@ import {
   ColumnInstance,
   HeaderGroup,
   Row,
+  TableOptions,
   useGlobalFilter,
   usePagination,
   useRowSelect,
@@ -38,21 +39,21 @@ const IndeterminateCheckbox = ({
   );
 };
 
-interface EditableCellProps<D> {
-  cell: { value: any };
-  row: { index: number };
+interface EditableCellProps<D extends {}> {
   column: { id: number };
+  row: { index: number };
+  value: any;
   data: D[];
   setData: React.Dispatch<React.SetStateAction<D[]>>;
 }
 
-const EditableCell = <D extends {}>({
-  cell: { value: initialValue },
-  row: { index },
+function EditableCell<D extends {}>({
   column: { id },
+  row: { index },
+  value: initialValue,
   data,
   setData,
-}: EditableCellProps<D>): React.ReactElement => {
+}: EditableCellProps<D>): React.ReactElement {
   const [value, setValue] = React.useState(initialValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -80,35 +81,37 @@ const EditableCell = <D extends {}>({
       size={value ? value.length : null}
     />
   );
-};
+}
 
-interface MuiTableProps<D> {
+interface MuiTableProps<D extends {}> {
   title: string;
-  columns: Array<Column>;
+  columns: Column<D>[];
   data: D[];
   setData: React.Dispatch<React.SetStateAction<D[]>>;
   editableCell?: boolean;
 }
 
-const Table = <D extends {}>({
+function Table<D extends {}>({
   title,
   columns,
   data,
   setData,
   editableCell,
-}: MuiTableProps<D>): React.ReactElement => {
-  const defaultColumn: Column = {};
+}: MuiTableProps<D>): React.ReactElement {
+  const tableOptions: TableOptions<D> = {
+    columns,
+    data,
+    setData,
+  };
+
   if (editableCell) {
-    defaultColumn.Cell = EditableCell;
+    tableOptions.defaultColumn = {
+      Cell: EditableCell,
+    };
   }
 
   const tableInstance = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-      setData,
-    },
+    tableOptions,
     useGlobalFilter,
     useSortBy,
     usePagination,
@@ -178,7 +181,7 @@ const Table = <D extends {}>({
                 <th>
                   <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
                 </th>
-                {headerGroup.headers.map((column: ColumnInstance) => (
+                {headerGroup.headers.map((column: ColumnInstance<D>) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     className="p-1  text-left text-on-surface font-normal"
@@ -195,7 +198,7 @@ const Table = <D extends {}>({
           </thead>
 
           <tbody {...getTableBodyProps()}>
-            {page.map((row: Row) => {
+            {page.map((row: Row<D>) => {
               prepareRow(row);
               return (
                 <tr

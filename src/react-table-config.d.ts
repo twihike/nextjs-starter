@@ -1,4 +1,5 @@
 // https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-table
+/* eslint-disable @typescript-eslint/ban-types */
 import {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -96,7 +97,7 @@ declare module 'react-table' {
       UseRowStateState<D>,
       UseSortByState<D> {}
 
-  export interface Column<D extends object = {}>
+  export interface ColumnInterface<D extends object = {}>
     extends UseFiltersColumnOptions<D>,
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
@@ -109,7 +110,7 @@ declare module 'react-table' {
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D> {}
 
-  export interface Cell<D extends object = {}>
+  export interface Cell<D extends object = {}, V = any>
     extends UseGroupByCellProps<D>,
       UseRowStateCellProps<D> {}
 
@@ -119,3 +120,4 @@ declare module 'react-table' {
       UseRowSelectRowProps<D>,
       UseRowStateRowProps<D> {}
 }
+/* eslint-enable @typescript-eslint/ban-types */

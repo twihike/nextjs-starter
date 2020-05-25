@@ -39,21 +39,21 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-interface MuiTableToolbarProps<D> {
+interface MuiTableToolbarProps<D extends {}> {
   title: string;
-  allColumns: Array<Column>;
+  allColumns: Column<D>[];
   numSelected: number;
   deleteSelectedRowsHandler: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void;
   globalFilter: string;
-  preGlobalFilteredRows: Row<object>[];
-  setGlobalFilter: (filterValue: D) => void;
+  preGlobalFilteredRows: Row<D>[];
+  setGlobalFilter: (filterValue: unknown) => void;
 }
 
-const MuiTableToolbar = <D extends {}>(
+function MuiTableToolbar<D extends {}>(
   props: MuiTableToolbarProps<D>,
-): React.ReactElement => {
+): React.ReactElement {
   const classes = useToolbarStyles();
   const {
     title,

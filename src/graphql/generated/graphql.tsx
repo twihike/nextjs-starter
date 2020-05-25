@@ -9,12 +9,45 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
 };
 
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  version: Scalars['Int'];
+};
+
+
+export type SignInResult = {
+  __typename?: 'SignInResult';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  version: Scalars['Int'];
+  token: Scalars['String'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  users: Array<User>;
+  user: User;
+};
+
+
+export type QueryUserArgs = {
+  name: Scalars['String'];
+};
 
 export type Mutation = {
-   __typename?: 'Mutation';
+  __typename?: 'Mutation';
   signUp: User;
   signIn: SignInResult;
 };
@@ -29,47 +62,15 @@ export type MutationSignInArgs = {
   input: SignInInput;
 };
 
-export type Query = {
-   __typename?: 'Query';
-  users: Array<User>;
-  user: User;
-};
-
-
-export type QueryUserArgs = {
-  name: Scalars['String'];
-};
-
-export type SignInInput = {
-  name: Scalars['String'];
-  password: Scalars['String'];
-};
-
-export type SignInResult = {
-   __typename?: 'SignInResult';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  version: Scalars['Int'];
-  token: Scalars['String'];
-};
-
 export type SignUpInput = {
   name: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 };
 
-export type User = {
-   __typename?: 'User';
-  id: Scalars['ID'];
+export type SignInInput = {
   name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  version: Scalars['Int'];
+  password: Scalars['String'];
 };
 
 export type GetAllUsersQueryVariables = {};
@@ -127,7 +128,7 @@ export const GetAllUsersDocument = gql`
  * __useGetAllUsersQuery__
  *
  * To run a query within a React component, call `useGetAllUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useGetAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
