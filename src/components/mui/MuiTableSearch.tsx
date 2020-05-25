@@ -44,15 +44,15 @@ const useStyles = makeStyles((theme) => ({
 
 interface MuiTableSearchProps {
   globalFilter: string;
-  preGlobalFilteredRows: object[];
-  setGlobalFilter: Function;
+  preGlobalFilteredRows: Row<D>[];
+  setGlobalFilter: (filterValue: unknown) => void;
 }
 
-const MuiTableSearch = ({
+function MuiTableSearch<D extends {}>({
   globalFilter,
   preGlobalFilteredRows,
   setGlobalFilter,
-}: MuiTableSearchProps): React.ReactElement => {
+}: MuiTableSearchProps<D>): React.ReactElement {
   const classes = useStyles();
   const count = preGlobalFilteredRows.length;
 
@@ -81,6 +81,6 @@ const MuiTableSearch = ({
       />
     </div>
   );
-};
+}
 
 export default MuiTableSearch;

@@ -1,19 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-props-no-spreading */
-
-import React from 'react';
-import {
-  Column,
-  ColumnInstance,
-  HeaderGroup,
-  Row,
-  useGlobalFilter,
-  usePagination,
-  useRowSelect,
-  useSortBy,
-  useTable,
-} from 'react-table';
-
 import { InputBase } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Table from '@material-ui/core/Table';
@@ -25,25 +9,39 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import React from 'react';
+import {
+  Column,
+  ColumnInstance,
+  HeaderGroup,
+  Row,
+  TableOptions,
+  useGlobalFilter,
+  usePagination,
+  useRowSelect,
+  useSortBy,
+  useTable,
+} from 'react-table';
 
 import TablePaginationActions from './MuiTablePaginationActions';
 import TableToolbar from './MuiTableToolbar';
 
-interface EditableCellProps<D> {
-  cell: { value: any };
-  row: { index: number };
+/* eslint-disable @typescript-eslint/ban-types */
+interface EditableCellProps<D extends {}> {
   column: { id: number };
+  row: { index: number };
+  value: string;
   data: D[];
   setData: React.Dispatch<React.SetStateAction<D[]>>;
 }
 
-const EditableCell = <D extends {}>({
-  cell: { value: initialValue },
-  row: { index },
+function EditableCell<D extends {}>({
   column: { id },
+  row: { index },
+  value: initialValue,
   data,
   setData,
-}: EditableCellProps<D>): React.ReactElement => {
+}: EditableCellProps<D>): React.ReactElement {
   const inputStyle = {
     padding: 0,
     margin: 0,
@@ -78,35 +76,39 @@ const EditableCell = <D extends {}>({
       inputProps={{ size: value ? value.length : null }}
     />
   );
-};
+}
 
-interface MuiTableProps<D> {
+interface MuiTableProps<D extends {}> {
   title: string;
-  columns: Array<Column>;
+  columns: Column<D>[];
   data: D[];
   setData: React.Dispatch<React.SetStateAction<D[]>>;
   editableCell?: boolean;
 }
 
-const MuiTable = <D extends {}>({
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/jsx-props-no-spreading */
+function MuiTable<D extends {}>({
   title,
   columns,
   data,
   setData,
   editableCell,
-}: MuiTableProps<D>): React.ReactElement => {
-  const defaultColumn: Column = {};
+}: MuiTableProps<D>): React.ReactElement {
+  const tableOptions: TableOptions<D> = {
+    columns,
+    data,
+    setData,
+  };
+
   if (editableCell) {
-    defaultColumn.Cell = EditableCell;
+    tableOptions.defaultColumn = {
+      Cell: EditableCell,
+    };
   }
 
   const tableInstance = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-      setData,
-    },
+    tableOptions,
     useGlobalFilter,
     useSortBy,
     usePagination,
@@ -145,12 +147,12 @@ const MuiTable = <D extends {}>({
       />
       <Table {...getTableProps()}>
         <TableHead>
-          {headerGroups.map((headerGroup: HeaderGroup) => (
+          {headerGroups.map((headerGroup: HeaderGroup<D>) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               <TableCell>
                 <Checkbox {...getToggleAllRowsSelectedProps()} />
               </TableCell>
-              {headerGroup.headers.map((column: ColumnInstance) => (
+              {headerGroup.headers.map((column: ColumnInstance<D>) => (
                 <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
@@ -167,7 +169,7 @@ const MuiTable = <D extends {}>({
         </TableHead>
 
         <TableBody>
-          {page.map((row: Row) => {
+          {page.map((row: Row<D>) => {
             prepareRow(row);
             return (
               <TableRow hover {...row.getRowProps()}>
@@ -210,6 +212,9 @@ const MuiTable = <D extends {}>({
       </Table>
     </TableContainer>
   );
-};
+}
+/* eslint-enable react/jsx-key */
+/* eslint-enable react/jsx-props-no-spreading */
+/* eslint-enable @typescript-eslint/ban-types */
 
 export default MuiTable;

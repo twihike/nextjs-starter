@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignUp = (): React.ReactElement => {
   const classes = useStyles();
 
-  const formSchema = yup.object({
+  const formSchema = yup
+    .object({
     name: yup
       .string()
       .required()
@@ -44,10 +45,11 @@ const SignUp = (): React.ReactElement => {
     password: yup
       .string()
       .required()
-      .matches(/^[\x20-\x7e]+$/)
+        .matches(/^[\u0020-\u007E]+$/)
       .min(8)
       .max(64),
-  });
+    })
+    .required();
   type FormValues = yup.InferType<typeof formSchema>;
   const initialFormValues: FormValues = {
     name: '',

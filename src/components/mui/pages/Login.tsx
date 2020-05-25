@@ -34,10 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Login = (): React.ReactElement => {
   const classes = useStyles();
 
-  const formSchema = yup.object({
+  const formSchema = yup
+    .object({
     name: yup.string().required(),
     password: yup.string().required(),
-  });
+    })
+    .required();
   type FormValues = yup.InferType<typeof formSchema>;
   const initialFormValues: FormValues = {
     name: '',

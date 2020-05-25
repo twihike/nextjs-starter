@@ -1,19 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
+import { ApolloLink } from '@apollo/client';
+import { SchemaLink } from '@apollo/link-schema';
 import { buildClientSchema } from 'graphql';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
 import {
-  addMockFunctionsToSchema,
-  addResolveFunctionsToSchema,
+  addMocksToSchema,
+  addResolversToSchema,
   makeExecutableSchema,
 } from 'graphql-tools';
 
-import { ApolloLink } from '@apollo/client';
-import { SchemaLink } from '@apollo/link-schema';
-
 import introspectionResult from '../graphql/generated/schema.json';
 import typeDefs from '../graphql/generated/typedefs';
+/* eslint-enable import/no-extraneous-dependencies */
 
 export const defaultMocks = {
   Int: (): number => 1,
@@ -36,11 +35,11 @@ export function createMockLink(): ApolloLink {
   const resolvers = defaultResolvers;
   const mocks = defaultMocks;
 
-  addResolveFunctionsToSchema({
+  addResolversToSchema({
     schema,
     resolvers,
   });
-  addMockFunctionsToSchema({ schema, mocks });
+  addMocksToSchema({ schema, mocks });
 
   return new SchemaLink({ schema });
 }
