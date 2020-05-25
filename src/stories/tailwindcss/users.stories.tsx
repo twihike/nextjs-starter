@@ -7,6 +7,7 @@ import { NextPage } from 'next';
 import Router from 'next/router';
 import React from 'react';
 
+import CommonHead from '../../components/tailwindcss/CommonHead';
 import CommonProviders from '../../components/tailwindcss/CommonProviders';
 import Users from '../../components/tailwindcss/pages/Users';
 import { authInstances } from '../../lib/auth';
@@ -22,7 +23,9 @@ const Page = withApollo(Users, { useMock: true, setAuthToken: true });
 export default { title: 'TailwindCSS Users' };
 
 export const page: NextPage = () => (
+  <CommonHead>
   <CommonProviders>
     <Page />
   </CommonProviders>
+  </CommonHead>
 );

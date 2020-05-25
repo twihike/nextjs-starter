@@ -52,7 +52,7 @@
 }
 
 .tk-account-menu-nav {
-  @apply fixed inset-auto z-10 h-0  bg-surface text-on-surface transform scale-0 duration-300;
+  @apply fixed inset-auto z-10 h-0  bg-surface text-on-surface transform scale-0 duration-100;
 }
 
 .tk-account-menu-checkbox:checked + .tk-account-menu-overlay + .tk-account-menu-nav {

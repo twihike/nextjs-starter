@@ -77,7 +77,7 @@ function MuiTableSearch<D extends {}>({
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search' }}
+        inputProps={{ 'aria-label': 'Search' }}
       />
     </div>
   );

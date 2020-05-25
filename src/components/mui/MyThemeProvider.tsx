@@ -16,13 +16,15 @@ const MyThemeProvider = (
     const themeProps: ThemeOptions = {
       palette: {
         type: darkMode.isDarkMode ? 'dark' : 'light',
-        primary: blue,
+        primary: {
+          main: darkMode.isDarkMode ? blue[200] : blue[800],
+        },
       },
     };
-    if (darkMode.isDarkMode) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      themeProps.palette!.background = {
+    if (darkMode.isDarkMode && themeProps.palette) {
+      themeProps.palette.background = {
         default: '#202020',
+        paper: '#303030',
       };
     }
     return createMuiTheme(themeProps);
