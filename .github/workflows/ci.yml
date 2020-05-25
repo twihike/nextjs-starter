@@ -1,0 +1,337 @@
+# https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  cache-version: v20200524
+  YARN_CACHE: 'true'
+
+jobs:
+  yarn-install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        if: env.YARN_CACHE == 'true'
+      - uses: actions/setup-node@v1
+        if: env.YARN_CACHE == 'true'
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        if: env.YARN_CACHE == 'true'
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+
+  lint:
+    needs: yarn-install
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+      - run: yarn lint
+        continue-on-error: true
+
+  unit-test:
+    needs: yarn-install
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+      - run: yarn test:unit
+
+  e2e-test:
+    needs: yarn-install
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        node-version: [12.x]
+        browser: [chrome, edge]
+        exclude:
+          - os: ubuntu-18.04
+            browser: edge
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+      - run: yarn build
+      - run: yarn export
+      - run: yarn cypress info
+      - run: yarn start-test start 3001 "cypress run --browser ${{ matrix.browser }}"
+      - name: Upload snapshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: snapshots-${{ matrix.os }}-${{ matrix.browser }}
+          path: tests/e2e/snapshots
+
+  e2e-test-merge-snapshots-1:
+    needs: e2e-test
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: mkdir snapshots
+      - run: touch snapshots/touch
+      - name: Upload snapshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: snapshots
+          path: snapshots
+
+  e2e-test-merge-snapshots-2:
+    needs: e2e-test-merge-snapshots-1
+    strategy:
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        node-version: [12.x]
+        browser: [chrome, edge]
+        exclude:
+          - os: ubuntu-18.04
+            browser: edge
+    runs-on: ubuntu-18.04
+    steps:
+      - run: mkdir snapshots
+      - name: Download snapshots
+        uses: actions/download-artifact@v1
+        with:
+          name: snapshots
+          path: snapshots
+      - run: |
+          if [ -e snapshots/touch ]; then
+            rm snapshots/touch
+          fi
+      - name: Download snapshots
+        uses: actions/download-artifact@v1
+        with:
+          name: snapshots-${{ matrix.os }}-${{ matrix.browser }}
+          path: snapshots/${{ matrix.os }}-${{ matrix.browser }}
+      - name: Upload snapshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: snapshots
+          path: snapshots
+
+  e2e-test-save-snapshots:
+    needs: e2e-test-merge-snapshots-2
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Download snapshots
+        uses: actions/download-artifact@v1
+        with:
+          name: snapshots
+          path: snapshots
+      - uses: actions/checkout@v2
+        with:
+          ref: snapshots
+          path: repo
+      - name: Copy snapshots
+        run: |
+          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+            REF_DIR="master"
+          else
+            REF_DIR="${GITHUB_REF////-}"
+          fi
+          CUR_DIR="repo/${REF_DIR}"
+          OLD_DIR="repo/${REF_DIR}-old"
+          if [ -e "${OLD_DIR}" ]; then
+            rm -rf -v "${OLD_DIR}"
+          fi
+          if [ -e "${CUR_DIR}" ]; then
+            # mkdir -p -v "repo/${REF_DIR}-old"
+            mv -v "${CUR_DIR}" "${OLD_DIR}"
+          fi
+          mkdir -p -v "${CUR_DIR}"
+          cp -r -v snapshots/* "${CUR_DIR}/"
+      - name: Push snapshots
+        run: |
+          git config --local user.email "${GIT_EMAIL}"
+          git config --local user.name "${GITHUB_ACTOR}"
+          git add .
+          git commit -m "Update snapshots ${GITHUB_SHA:0:7}"
+          git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:snapshots
+        working-directory: repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_EMAIL: example@example.com
+
+  e2e-test-check-diff:
+    needs: e2e-test-save-snapshots
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node-version: [12.x]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: repo
+      - uses: actions/checkout@v2
+        with:
+          ref: snapshots
+          path: snapshots
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+        working-directory: repo
+      - name: Put snapshots
+        run: |
+          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+            EXPECTED_DIR="master-old"
+            ACTUAL_DIR="master"
+          else
+            EXPECTED_DIR="master"
+            ACTUAL_DIR="${GITHUB_REF////-}"
+          fi
+          mkdir -p repo/.reg
+          cp -r -v "snapshots/${EXPECTED_DIR}" repo/.reg/expected
+          cp -r -v "snapshots/${ACTUAL_DIR}" repo/.reg/actual
+        continue-on-error: true
+      - name: Check diff
+        run: |
+          yarn reg-cli .reg/actual .reg/expected .reg/diff \
+            -J .reg/reg.json -R .reg/report.html
+        working-directory: repo
+        continue-on-error: true
+      - uses: actions/upload-artifact@v1
+        with:
+          name: snapshots-diff
+          path: repo/.reg
+
+  lighthouse-test:
+    needs: yarn-install
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Yarn offline cache
+        uses: actions/cache@v1
+        id: yarn-offline-cache
+        if: env.YARN_CACHE == 'true'
+        with:
+          path: ~/yarn-offline-cache
+          key: ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-yarn-${{ matrix.os }}-${{ matrix.node-version }}-
+      - name: Install packages
+        run: |
+          yarn config set network-timeout 300000
+          yarn config set yarn-offline-mirror ./yarn-offline-cache
+          yarn config set yarn-offline-mirror-pruning true
+          yarn install --frozen-lockfile --prefer-offline
+      - run: yarn build
+      - run: yarn export
+      - uses: treosh/lighthouse-ci-action@v2
+        with:
+          uploadArtifacts: true
+          temporaryPublicStorage: false
+          configPath: './lighthouserc.json'
