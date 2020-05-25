@@ -1,9 +1,8 @@
 /* eslint-env jest */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import React from 'react';
-
 import { render } from '@testing-library/react';
+import React from 'react';
 
 import App from './Index';
 
@@ -22,3 +21,5 @@ describe('With React Testing Library Snapshot', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 });
+
+/* eslint-enable import/no-extraneous-dependencies */

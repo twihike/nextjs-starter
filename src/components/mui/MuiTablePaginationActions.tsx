@@ -1,8 +1,6 @@
 // Custom pagination actions
 // https://material-ui.com/components/tables/
 
-import React from 'react';
-
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { TablePaginationActionsProps } from '@material-ui/core/TablePagination/TablePaginationActions';
@@ -10,6 +8,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TablePaginationActions = (
+function TablePaginationActions(
   props: TablePaginationActionsProps,
-): React.ReactElement => {
+): React.ReactElement {
   const classes = useStyles();
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
@@ -89,6 +88,6 @@ const TablePaginationActions = (
       </IconButton>
     </div>
   );
-};
+}
 
 export default TablePaginationActions;

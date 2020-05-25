@@ -1,8 +1,3 @@
-/* eslint-disable global-require */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-import fetch from 'isomorphic-unfetch';
-
 import {
   ApolloClient,
   ApolloLink,
@@ -11,6 +6,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { setContext } from '@apollo/link-context';
+import fetch from 'isomorphic-unfetch';
 
 import { authInstances } from './auth';
 
@@ -55,6 +51,7 @@ export function createApolloClient({
 
   let link: ApolloLink;
   if (useMock) {
+    // eslint-disable-next-line global-require
     link = require('./apollo-mock').createMockLink();
   } else if (setAuthToken) {
     link = createAuthLink({ authName }).concat(createIsomorphLink());

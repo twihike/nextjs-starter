@@ -2,7 +2,7 @@ import React from 'react';
 
 import Layout from '../Layout';
 
-const Index = (): React.ReactElement => {
+function Index(): React.ReactElement {
   return (
     <Layout>
       <div className="p-2">
@@ -52,6 +52,6 @@ const Index = (): React.ReactElement => {
       </div>
     </Layout>
   );
-};
+}
 
 export default Index;

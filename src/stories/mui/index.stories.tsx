@@ -1,25 +1,25 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { NextPage } from 'next';
 import Router from 'next/router';
 import React from 'react';
 
 import CommonHead from '../../components/mui/CommonHead';
 import CommonProviders from '../../components/mui/CommonProviders';
-import Index from '../../components/mui/pages/Index';
+import Page from '../../components/mui/pages/Index';
 
 Router.router = {
-  push: async () => {},
+  /* eslint-disable @typescript-eslint/no-empty-function */
   prefetch: async () => {},
-} as any;
+  push: async () => {},
+  /* eslint-enable @typescript-eslint/no-empty-function */
+} as never;
 
 export default { title: 'Mui Index' };
 
+// eslint-disable-next-line react/function-component-definition
 export const page: NextPage = () => (
   <CommonHead>
     <CommonProviders>
-      <Index />
+      <Page />
     </CommonProviders>
   </CommonHead>
 );

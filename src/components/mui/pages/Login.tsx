@@ -1,20 +1,19 @@
+import {
+  Box,
+  Button,
+  Container,
+  Link as MuiLink,
+  Paper,
+  Theme,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 import * as yup from 'yup';
-
-import {
-  Box,
-  Button,
-  Container,
-  Link as MuiLink,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core';
 
 import { useSignInMutation } from '../../../graphql/generated/graphql';
 import { AuthContext } from '../../../lib/auth';
@@ -31,13 +30,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Login = (): React.ReactElement => {
+function Login(): React.ReactElement {
   const classes = useStyles();
 
   const formSchema = yup
     .object({
-    name: yup.string().required(),
-    password: yup.string().required(),
+      name: yup.string().required(),
+      password: yup.string().required(),
     })
     .required();
   type FormValues = yup.InferType<typeof formSchema>;
@@ -91,6 +90,7 @@ const Login = (): React.ReactElement => {
                   autoComplete="name"
                   label="Name"
                   required
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   fullWidth
                   variant="outlined"
@@ -140,6 +140,6 @@ const Login = (): React.ReactElement => {
       </Container>
     </Layout>
   );
-};
+}
 
 export default Login;

@@ -1,6 +1,5 @@
+import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
 import React from 'react';
-
-import { makeStyles, Paper, Theme, Typography } from '@material-ui/core';
 
 import Layout from '../Layout';
 
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Index = (): React.ReactElement => {
+function Index(): React.ReactElement {
   const classes = useStyles();
 
   return (
@@ -39,6 +38,6 @@ const Index = (): React.ReactElement => {
       </style>
     </Layout>
   );
-};
+}
 
 export default Index;

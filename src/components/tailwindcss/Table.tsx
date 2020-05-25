@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/jsx-props-no-spreading */
 
+import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import {
   Column,
@@ -15,15 +17,13 @@ import {
   useTable,
 } from 'react-table';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-
-const IndeterminateCheckbox = ({
+function IndeterminateCheckbox({
   indeterminate,
   ...rest
 }: {
   indeterminate?: boolean;
-  [key: string]: any;
-}): React.ReactElement => {
+  [key: string]: unknown;
+}): React.ReactElement {
   const ref = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
@@ -32,17 +32,13 @@ const IndeterminateCheckbox = ({
     }
   }, [indeterminate]);
 
-  return (
-    <>
-      <input type="checkbox" ref={ref} {...rest} />
-    </>
-  );
-};
+  return <input type="checkbox" ref={ref} {...rest} />;
+}
 
 interface EditableCellProps<D extends {}> {
   column: { id: number };
   row: { index: number };
-  value: any;
+  value: string;
   data: D[];
   setData: React.Dispatch<React.SetStateAction<D[]>>;
 }
@@ -78,7 +74,7 @@ function EditableCell<D extends {}>({
       value={value}
       onChange={onChange}
       onBlur={onBlur}
-      size={value ? value.length : null}
+      size={value ? value.length : undefined}
     />
   );
 }
@@ -140,8 +136,10 @@ function Table<D extends {}>({
   const numSelected = Object.keys(selectedRowIds).length;
 
   const deleteSelectedRowsHandler = (): void => {
-    const indexes = Object.keys(selectedRowIds).map((n) => parseInt(n, 10));
-    const newData = data.filter((_, i) => !indexes.includes(i));
+    const indexes = new Set(
+      Object.keys(selectedRowIds).map((n) => Number.parseInt(n, 10)),
+    );
+    const newData = data.filter((_, i) => !indexes.has(i));
     setData(newData);
   };
 
@@ -165,15 +163,15 @@ function Table<D extends {}>({
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label className="pl-1  text-on-surface">
           Search
-        <input
-          type="text"
-          className="tk-form-text tk-form-text-primary ml-1"
-          value={globalFilter}
-          onChange={(e): void => {
-            setGlobalFilter(e.target.value || undefined);
-          }}
-          placeholder={`${preGlobalFilteredRows.length} records...`}
-        />
+          <input
+            type="text"
+            className="tk-form-text tk-form-text-primary ml-1"
+            value={globalFilter}
+            onChange={(e): void => {
+              setGlobalFilter(e.target.value || undefined);
+            }}
+            placeholder={`${preGlobalFilteredRows.length} records...`}
+          />
         </label>
       </div>
 
@@ -237,19 +235,22 @@ function Table<D extends {}>({
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label className="pl-1 text-on-surface">
           Show
-        <select
-          className="ml-1  bg-transparent text-on-surface"
-          value={pageSize}
+          <select
+            className="ml-1  bg-transparent text-on-surface"
+            value={pageSize}
             onBlur={(e): void => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 30, 50].map((n) => (
-            <option key={n} value={n}>
+              setPageSize(Number(e.target.value));
+            }}
+            onChange={(e): void => {
+              setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 30, 50].map((n) => (
+              <option key={n} value={n}>
                 {n}
-            </option>
-          ))}
-        </select>
+              </option>
+            ))}
+          </select>
         </label>
         <span className="pl-1  text-on-surface">
           {` page ${pageIndex + 1} of ${pageCount} `}
@@ -292,3 +293,7 @@ function Table<D extends {}>({
 }
 
 export default Table;
+
+/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable react/jsx-key */
+/* eslint-enable react/jsx-props-no-spreading */

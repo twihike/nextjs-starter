@@ -1,6 +1,5 @@
+import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
 import React from 'react';
-
-import { makeStyles, Paper, Theme, Typography } from '@material-ui/core';
 
 import { useGetAllUsersQuery } from '../../../graphql/generated/graphql';
 import { AuthContext } from '../../../lib/auth';
@@ -41,7 +40,7 @@ const userTableColumns = [
   },
 ];
 
-const Users = (): React.ReactElement => {
+function Users(): React.ReactElement {
   const classes = useStyles();
 
   const result = useGetAllUsersQuery();
@@ -68,10 +67,10 @@ const Users = (): React.ReactElement => {
     setTableData(copiedData);
 
     return origData;
-  }, [data]);
+  }, [auth.default, data]);
   const isEdited = React.useMemo(
     () => origTableDataStr !== JSON.stringify(tableData),
-    [tableData],
+    [origTableDataStr, tableData],
   );
 
   return (
@@ -91,6 +90,6 @@ const Users = (): React.ReactElement => {
       </div>
     </Layout>
   );
-};
+}
 
 export default Users;

@@ -5,7 +5,7 @@ import React from 'react';
 import { useSignUpMutation } from '../../../graphql/generated/graphql';
 import Layout from '../Layout';
 
-const SignUp = (): React.ReactElement => {
+function SignUp(): React.ReactElement {
   const [state, setState] = React.useState({
     name: '',
     email: '',
@@ -114,6 +114,6 @@ const SignUp = (): React.ReactElement => {
       </div>
     </Layout>
   );
-};
+}
 
 export default SignUp;
