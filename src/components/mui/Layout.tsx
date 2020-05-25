@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       // width: `calc(100% - ${drawerWidth}px)`,
       // marginLeft: drawerWidth,
     },
-    backgroundColor: theme.palette.type === 'light' ? '#ffffff' : '#424242',
+    backgroundColor: theme.palette.background.paper,
   },
   menuTitle: {
     flexGrow: 1,
@@ -148,11 +148,12 @@ const Layout = ({
               Next.js starter
             </MuiLink>
           </Link>
-          <IconButton onClick={handleDarkMode}>
+          <IconButton onClick={handleDarkMode} aria-label="Dark mode">
             <Brightness4 />
           </IconButton>
           <IconButton
             onClick={handleAccountMenuOpen}
+            aria-label="Account menu"
             data-test-id="account-icon"
           >
             <AccountCircle />
@@ -182,6 +183,7 @@ const Layout = ({
           <IconButton
             className={classes.menuButton}
             onClick={handleDrawerOpen}
+            aria-label="Menu"
             data-test-id="menu-icon"
           >
             <MenuIcon />
@@ -203,7 +205,7 @@ const Layout = ({
         <footer className={classes.footer}>
           <Typography align="center">
             Powered by&nbsp;
-            <MuiLink href="https://github.com/twihike">
+            <MuiLink href="https://github.com/twihike" color="primary">
               Next.js starter
             </MuiLink>
           </Typography>

@@ -119,10 +119,10 @@ const Login = (): React.ReactElement => {
                     Log in
                   </Button>
                 </Box>
-                <Box mt={2} mb={1}>
+                <Box mt={2} mb={1} fontSize="body2.fontSize">
                   Don&apos;t have an account?&nbsp;
                   <Link href="/signup" passHref>
-                    <MuiLink component="a" variant="body2">
+                    <MuiLink component="a" color="primary">
                       Create an account
                     </MuiLink>
                   </Link>

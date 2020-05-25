@@ -147,7 +147,7 @@ function Table<D extends {}>({
 
   return (
     <div className="w-full">
-      <div className="flex items-end  py-1">
+      <div className="flex items-center  py-1">
         <h1 className="pl-1  text-xl text-on-surface">{title}</h1>
         {numSelected > 0 && (
           <>
@@ -162,6 +162,9 @@ function Table<D extends {}>({
           </>
         )}
         <div className="flex-grow" />
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label className="pl-1  text-on-surface">
+          Search
         <input
           type="text"
           className="tk-form-text tk-form-text-primary ml-1"
@@ -171,12 +174,13 @@ function Table<D extends {}>({
           }}
           placeholder={`${preGlobalFilteredRows.length} records...`}
         />
+        </label>
       </div>
 
       <div className="w-full p-1  border border-on-surface-border rounded-md">
         <table {...getTableProps()} className="w-full">
           <thead>
-            {headerGroups.map((headerGroup: HeaderGroup) => (
+            {headerGroups.map((headerGroup: HeaderGroup<D>) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 <th>
                   <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
@@ -229,26 +233,30 @@ function Table<D extends {}>({
         </table>
       </div>
 
-      <div className="flex justify-end  py-1">
+      <div className="flex items-center justify-end  py-1">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label className="pl-1 text-on-surface">
+          Show
         <select
           className="ml-1  bg-transparent text-on-surface"
           value={pageSize}
-          onChange={(e): void => {
+            onBlur={(e): void => {
             setPageSize(Number(e.target.value));
           }}
         >
           {[10, 30, 50].map((n) => (
             <option key={n} value={n}>
-              Show {n}
+                {n}
             </option>
           ))}
         </select>
+        </label>
         <span className="pl-1  text-on-surface">
           {` page ${pageIndex + 1} of ${pageCount} `}
         </span>
         <button
           type="button"
-          className="tk-button tk-button-contained tk-button-ripple ml-1 px-2 py-0"
+          className="tk-button tk-button-contained tk-button-ripple ml-1"
           onClick={(): void => gotoPage(0)}
           disabled={!canPreviousPage}
         >
@@ -256,7 +264,7 @@ function Table<D extends {}>({
         </button>
         <button
           type="button"
-          className="tk-button tk-button-contained tk-button-ripple ml-1 px-2 py-0"
+          className="tk-button tk-button-contained tk-button-ripple ml-1"
           onClick={(): void => previousPage()}
           disabled={!canPreviousPage}
         >
@@ -264,7 +272,7 @@ function Table<D extends {}>({
         </button>
         <button
           type="button"
-          className="tk-button tk-button-contained tk-button-ripple ml-1 px-2 py-0"
+          className="tk-button tk-button-contained tk-button-ripple ml-1"
           onClick={(): void => nextPage()}
           disabled={!canNextPage}
         >
@@ -272,7 +280,7 @@ function Table<D extends {}>({
         </button>
         <button
           type="button"
-          className="tk-button tk-button-contained tk-button-ripple ml-1 px-2 py-0"
+          className="tk-button tk-button-contained tk-button-ripple ml-1"
           onClick={(): void => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
         >
@@ -281,6 +289,6 @@ function Table<D extends {}>({
       </div>
     </div>
   );
-};
+}
 
 export default Table;

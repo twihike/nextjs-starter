@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-
 const { Theme, ThemeBuilder } = require('tailwindcss-theming');
 
 const commonColors = {
@@ -76,9 +75,10 @@ const lightTheme = new Theme()
     ...commonColors,
     ...palette,
 
-    primary: '#1976d2',
-    'primary-light': '#63a4ff',
-    'primary-dark': '#004ba0',
+    primary: '#1565c0',
+    'primary-variant': '#2196f3',
+    'primary-light': '#5e92f3',
+    'primary-dark': '#003c8f',
     background: '#f5f5f5',
     'background-light': '#ffffff',
     'background-dark': '#c2c2c2',
@@ -87,12 +87,12 @@ const lightTheme = new Theme()
     'surface-dark': '#c7c7c7',
 
     'on-primary': '#ffffff',
-    'on-background': '#424242',
-    'on-background-light': '#6d6d6d',
-    'on-background-dark': '#1b1b1b',
-    'on-surface': '#525252',
-    'on-surface-light': '#7e7e7e',
-    'on-surface-dark': '#2a2a2a',
+    'on-background': '#212121',
+    'on-background-light': '#484848',
+    'on-background-dark': '#484848',
+    'on-surface': '#313131',
+    'on-surface-light': '#5a5a5a',
+    'on-surface-dark': '#080808',
 
     error: '#b00020',
     'on-error': '#ffffff',
@@ -108,9 +108,10 @@ const darkTheme = new Theme().name('dark').colors({
   ...commonColors,
   ...palette,
 
-  primary: '#2196f3',
-  'primary-light': '#6ec6ff',
-  'primary-dark': '#0069c0',
+  primary: '#90caf9',
+  'primary-variant': '#1976d2',
+  'primary-light': '#c3fdff',
+  'primary-dark': '#5d99c6',
   background: '#303030',
   'background-light': '#595959',
   'background-dark': '#070707',
@@ -118,13 +119,13 @@ const darkTheme = new Theme().name('dark').colors({
   'surface-light': '#383838',
   'surface-dark': '#000000',
 
-  'on-primary': '#ffffff',
-  'on-background': '#eeeeee',
+  'on-primary': '#121212',
+  'on-background': '#e7e7e7',
   'on-background-light': '#ffffff',
-  'on-background-dark': '#bcbcbc',
-  'on-surface': '#e7e7e7',
+  'on-background-dark': '#b5b5b5',
+  'on-surface': '#f5f5f5',
   'on-surface-light': '#ffffff',
-  'on-surface-dark': '#b5b5b5',
+  'on-surface-dark': '#c2c2c2',
 
   error: '#e67388',
   'on-error': '#ffffff',

@@ -33,7 +33,7 @@
 }
 
 .tk-button-contained-primary:hover {
-  @apply bg-primary-dark;
+  @apply bg-primary-light;
 }
 
 

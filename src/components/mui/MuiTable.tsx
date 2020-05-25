@@ -150,7 +150,10 @@ function MuiTable<D extends {}>({
           {headerGroups.map((headerGroup: HeaderGroup<D>) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               <TableCell>
-                <Checkbox {...getToggleAllRowsSelectedProps()} />
+                <Checkbox
+                  inputProps={{ 'aria-label': 'Select all rows' }}
+                  {...getToggleAllRowsSelectedProps()}
+                />
               </TableCell>
               {headerGroup.headers.map((column: ColumnInstance<D>) => (
                 <TableCell
@@ -174,7 +177,10 @@ function MuiTable<D extends {}>({
             return (
               <TableRow hover {...row.getRowProps()}>
                 <TableCell>
-                  <Checkbox {...row.getToggleRowSelectedProps()} />
+                  <Checkbox
+                    inputProps={{ 'aria-labelledby': 'Select row' }}
+                    {...row.getToggleRowSelectedProps()}
+                  />
                 </TableCell>
                 {row.cells.map((cell) => {
                   return (
@@ -196,7 +202,7 @@ function MuiTable<D extends {}>({
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               rowsPerPage={pageSize}
               SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
+                inputProps: { 'aria-label': 'Rows per page' },
                 native: true,
               }}
               onChangePage={(e, newPage): void => {
