@@ -1,5 +1,4 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-/* eslint-disable react/jsx-props-no-spreading */
 
 import App from 'next/app';
 import React from 'react';
@@ -7,11 +6,13 @@ import React from 'react';
 import CommonHead from './CommonHead';
 import CommonProviders from './CommonProviders';
 
+/* eslint-disable react/jsx-props-no-spreading */
 class MuiApp extends App {
   componentDidMount(): void {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles?.parentElement) {
+      // eslint-disable-next-line unicorn/prefer-node-remove
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }
@@ -28,6 +29,7 @@ class MuiApp extends App {
     );
   }
 }
+/* eslint-enable react/jsx-props-no-spreading */
 
 export default MuiApp;
 

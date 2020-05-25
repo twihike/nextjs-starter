@@ -2,10 +2,12 @@ import React from 'react';
 
 import { AuthProvider } from '../../lib/auth';
 
-const CommonProviders = ({
+function CommonProviders({
   children,
-}: React.PropsWithChildren<{}>): React.ReactElement => {
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   return <AuthProvider>{children}</AuthProvider>;
-};
+}
 
 export default CommonProviders;

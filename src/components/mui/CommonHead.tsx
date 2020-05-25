@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import React from 'react';
 
-const CommonHead = ({
+function CommonHead({
   children,
-}: React.PropsWithChildren<{}>): React.ReactElement => {
+}: {
+  children?: React.ReactNode;
+}): React.ReactElement {
   return (
     <>
       <Head>
@@ -18,6 +20,6 @@ const CommonHead = ({
       {children}
     </>
   );
-};
+}
 
 export default CommonHead;

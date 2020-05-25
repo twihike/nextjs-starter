@@ -129,8 +129,10 @@ function MuiTable<D extends {}>({
   } = tableInstance;
 
   const deleteSelectedRowsHandler = (): void => {
-    const indexes = Object.keys(selectedRowIds).map((n) => parseInt(n, 10));
-    const newData = data.filter((_, i) => !indexes.includes(i));
+    const indexes = new Set(
+      Object.keys(selectedRowIds).map((n) => Number.parseInt(n, 10)),
+    );
+    const newData = data.filter((_, i) => !indexes.has(i));
     setData(newData);
   };
 

@@ -1,6 +1,6 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-/* eslint-disable react/jsx-props-no-spreading */
 
+import { ServerStyleSheets } from '@material-ui/core/styles';
 import { NextComponentType } from 'next';
 import { AppInitialProps } from 'next/app';
 import {
@@ -18,8 +18,6 @@ import Document, {
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-import { ServerStyleSheets } from '@material-ui/core/styles';
-
 class MuiDocument extends Document {
   render(): React.ReactElement {
     return (
@@ -34,6 +32,8 @@ class MuiDocument extends Document {
   }
 }
 
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable react/jsx-props-no-spreading */
 MuiDocument.getInitialProps = async (
   ctx: DocumentContext,
 ): Promise<DocumentInitialProps> => {
@@ -86,5 +86,7 @@ MuiDocument.getInitialProps = async (
     ],
   };
 };
+/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable react/jsx-props-no-spreading */
 
 export default MuiDocument;

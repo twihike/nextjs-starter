@@ -1,14 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
-import { NextPage, NextPageContext } from 'next';
-import Head from 'next/head';
-import React from 'react';
-
 import {
   ApolloClient,
   ApolloProvider,
   NormalizedCacheObject,
 } from '@apollo/client';
+import { NextPage, NextPageContext } from 'next';
+import Head from 'next/head';
+import React from 'react';
 
 import { initApolloClient } from './apollo';
 
@@ -20,6 +17,7 @@ export interface WithApolloPageContext extends NextPageContext {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 }
 
+/* eslint-disable react/jsx-props-no-spreading */
 export default function withApollo(
   PageComponent: NextPage,
   {
@@ -31,6 +29,7 @@ export default function withApollo(
     authName = 'default',
   } = {},
 ): NextPage {
+  // eslint-disable-next-line react/function-component-definition
   const WithApollo: NextPage<WithApolloProps> = ({
     apolloState,
     ...pageProps
@@ -55,6 +54,7 @@ export default function withApollo(
       PageComponent.displayName || PageComponent.name || 'Component';
 
     if (displayName === 'App') {
+      // eslint-disable-next-line no-console
       console.warn('This withApollo HOC only works with PageComponents.');
     }
 
@@ -106,6 +106,7 @@ export default function withApollo(
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            // eslint-disable-next-line no-console
             console.error('Error while running `getMarkupFromTree`', error);
           }
 
@@ -127,3 +128,4 @@ export default function withApollo(
 
   return WithApollo;
 }
+/* eslint-enable react/jsx-props-no-spreading */

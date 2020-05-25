@@ -1,17 +1,17 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuIcon from '@material-ui/icons/Menu';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuIcon from '@material-ui/icons/Menu';
-
 import { AuthContext } from '../../lib/auth';
 
-const Layout = ({
+/* eslint-disable jsx-a11y/label-has-associated-control */
+function Layout({
   children,
-}: React.PropsWithChildren<{}>): React.ReactElement => {
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   const [auth] = React.useContext(AuthContext);
   const isSignedIn = auth.default.getToken() !== '';
 
@@ -23,7 +23,9 @@ const Layout = ({
   type MenuItemType = {
     text: string;
     href?: string;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    handleClick?: (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => void;
   };
 
   const navMenuProps: MenuItemType[] = [
@@ -39,7 +41,7 @@ const Layout = ({
   ));
 
   const accountMenuProps: MenuItemType[] = isSignedIn
-    ? [{ text: 'Log out', onClick: handleSignOut }]
+    ? [{ text: 'Log out', handleClick: handleSignOut }]
     : [
         { text: 'Log in', href: '/login' },
         { text: 'Sign up', href: '/signup' },
@@ -59,7 +61,7 @@ const Layout = ({
         key={v.text}
         type="button"
         className="tk-menu-nav-item tk-button-ripple w-full text-left"
-        onClick={v.onClick}
+        onClick={v.handleClick}
       >
         {v.text}
       </button>
@@ -139,6 +141,7 @@ const Layout = ({
       </div>
     </div>
   );
-};
+}
+/* eslint-enable jsx-a11y/label-has-associated-control */
 
 export default Layout;

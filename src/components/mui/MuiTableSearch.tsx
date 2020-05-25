@@ -1,8 +1,8 @@
-import React from 'react';
-
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import React from 'react';
+import { Row } from 'react-table';
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -42,12 +42,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface MuiTableSearchProps {
+// eslint-disable-next-line @typescript-eslint/ban-types
+interface MuiTableSearchProps<D extends {}> {
   globalFilter: string;
   preGlobalFilteredRows: Row<D>[];
   setGlobalFilter: (filterValue: unknown) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function MuiTableSearch<D extends {}>({
   globalFilter,
   preGlobalFilteredRows,

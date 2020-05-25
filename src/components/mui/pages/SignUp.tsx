@@ -1,20 +1,19 @@
+import {
+  Box,
+  Button,
+  Container,
+  Link as MuiLink,
+  Paper,
+  Theme,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { TextField } from 'formik-material-ui';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 import * as yup from 'yup';
-
-import {
-  Box,
-  Button,
-  Container,
-  Link as MuiLink,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core';
 
 import { useSignUpMutation } from '../../../graphql/generated/graphql';
 import Layout from '../Layout';
@@ -30,24 +29,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SignUp = (): React.ReactElement => {
+function SignUp(): React.ReactElement {
   const classes = useStyles();
 
   const formSchema = yup
     .object({
-    name: yup
-      .string()
-      .required()
-      .matches(/^[a-zA-Z0-9-_]+$/)
-      .min(6)
-      .max(64),
-    email: yup.string().required().email(),
-    password: yup
-      .string()
-      .required()
+      name: yup
+        .string()
+        .required()
+        .matches(/^[\w-]+$/)
+        .min(6)
+        .max(64),
+      email: yup.string().required().email(),
+      password: yup
+        .string()
+        .required()
         .matches(/^[\u0020-\u007E]+$/)
-      .min(8)
-      .max(64),
+        .min(8)
+        .max(64),
     })
     .required();
   type FormValues = yup.InferType<typeof formSchema>;
@@ -99,6 +98,7 @@ const SignUp = (): React.ReactElement => {
                   autoComplete="name"
                   label="Name"
                   required
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   fullWidth
                   variant="outlined"
@@ -160,6 +160,6 @@ const SignUp = (): React.ReactElement => {
       </Container>
     </Layout>
   );
-};
+}
 
 export default SignUp;

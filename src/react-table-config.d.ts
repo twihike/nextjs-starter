@@ -1,5 +1,6 @@
 // https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-table
 /* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -121,3 +122,4 @@ declare module 'react-table' {
       UseRowStateRowProps<D> {}
 }
 /* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/no-explicit-any */

@@ -1,8 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
-import React from 'react';
-import { Column, Row } from 'react-table';
-
 import {
   Checkbox,
   FormControlLabel,
@@ -16,9 +11,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ViewColumnIcon from '@material-ui/icons/ViewColumn';
+import React from 'react';
+import { Column, Row } from 'react-table';
 
 import MuiTableSearch from './MuiTableSearch';
 
+/* eslint-disable @typescript-eslint/ban-types */
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
@@ -51,6 +49,7 @@ interface MuiTableToolbarProps<D extends {}> {
   setGlobalFilter: (filterValue: unknown) => void;
 }
 
+/* eslint-disable react/jsx-props-no-spreading */
 function MuiTableToolbar<D extends {}>(
   props: MuiTableToolbarProps<D>,
 ): React.ReactElement {
@@ -130,7 +129,7 @@ function MuiTableToolbar<D extends {}>(
               <FormControlLabel
                 key={column.id}
                 label={column.id}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 control={<Checkbox {...column.getToggleHiddenProps()} />}
               />
@@ -145,6 +144,8 @@ function MuiTableToolbar<D extends {}>(
       />
     </Toolbar>
   );
-};
+}
+/* eslint-enable react/jsx-props-no-spreading */
+/* eslint-enable @typescript-eslint/ban-types */
 
 export default MuiTableToolbar;

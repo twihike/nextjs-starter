@@ -3,21 +3,22 @@
 exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="makeStyles-root-189"
+    class="makeStyles-root-30"
   >
     <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorDefault makeStyles-appBar-190 mui-fixed MuiPaper-elevation4"
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorDefault makeStyles-appBar-31 mui-fixed MuiPaper-elevation4"
     >
       <div
         class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
       >
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineNone makeStyles-menuTitle-191 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-noWrap"
+          class="MuiTypography-root MuiLink-root MuiLink-underlineNone makeStyles-menuTitle-32 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-noWrap"
           href="/"
         >
           Next.js starter
         </a>
         <button
+          aria-label="Dark mode"
           class="MuiButtonBase-root MuiIconButton-root"
           tabindex="0"
           type="button"
@@ -41,6 +42,7 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
           />
         </button>
         <button
+          aria-label="Account menu"
           class="MuiButtonBase-root MuiIconButton-root"
           data-test-id="account-icon"
           tabindex="0"
@@ -65,7 +67,8 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
           />
         </button>
         <button
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-192"
+          aria-label="Menu"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-33"
           data-test-id="menu-icon"
           tabindex="0"
           type="button"
@@ -91,19 +94,19 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
       </div>
     </header>
     <nav
-      class="makeStyles-nav-193"
+      class="makeStyles-nav-34"
     >
       <div
-        class="PrivateHiddenCss-xsDown-305"
+        class="PrivateHiddenCss-xsDown-42"
       >
         <div
           class="MuiDrawer-root MuiDrawer-docked"
         >
           <div
-            class="MuiPaper-root MuiDrawer-paper makeStyles-drawer-194 MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+            class="MuiPaper-root MuiDrawer-paper makeStyles-drawer-35 MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
           >
             <div
-              class="makeStyles-toolbar-198"
+              class="makeStyles-toolbar-39"
             />
             <ul
               class="MuiList-root MuiList-padding"
@@ -152,19 +155,19 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
       </div>
     </nav>
     <div
-      class="MuiContainer-root makeStyles-container-195 MuiContainer-maxWidthLg"
+      class="MuiContainer-root makeStyles-container-36 MuiContainer-maxWidthLg"
     >
       <main
-        class="makeStyles-main-196"
+        class="makeStyles-main-37"
       >
         <div
-          class="makeStyles-toolbar-198"
+          class="makeStyles-toolbar-39"
         />
         <div
-          class="jsx-3495482960 makeStyles-page-187"
+          class="jsx-3495482960 makeStyles-page-28"
         >
           <div
-            class="MuiPaper-root makeStyles-paper-188 MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiPaper-root makeStyles-paper-29 MuiPaper-elevation1 MuiPaper-rounded"
           >
             <p
               class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter"
@@ -180,7 +183,7 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
         </div>
       </main>
       <footer
-        class="makeStyles-footer-197"
+        class="makeStyles-footer-38"
       >
         <p
           class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -197,7 +200,7 @@ exports[`With React Testing Library Snapshot Should match Snapshot 1`] = `
     </div>
     <nav>
       <div
-        class="PrivateHiddenCss-smUp-307"
+        class="PrivateHiddenCss-smUp-44"
       />
     </nav>
   </div>

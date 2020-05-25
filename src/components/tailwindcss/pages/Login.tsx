@@ -6,7 +6,7 @@ import { useSignInMutation } from '../../../graphql/generated/graphql';
 import { AuthContext } from '../../../lib/auth';
 import Layout from '../Layout';
 
-const Login = (): React.ReactElement => {
+function Login(): React.ReactElement {
   const [state, setState] = React.useState({
     name: '',
     password: '',
@@ -100,6 +100,6 @@ const Login = (): React.ReactElement => {
       </div>
     </Layout>
   );
-};
+}
 
 export default Login;

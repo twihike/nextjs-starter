@@ -1,16 +1,13 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
-import React from 'react';
-
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import React from 'react';
 
 import { DarkModeContext } from '../../lib/mui';
 
-const MyThemeProvider = (
-  props: Required<React.PropsWithChildren<{}>>,
-): React.ReactElement => {
+function MyThemeProvider(props: {
+  children: React.ReactNode;
+}): React.ReactElement {
   const [darkMode] = React.useContext(DarkModeContext);
   const theme = React.useMemo(() => {
     const themeProps: ThemeOptions = {
@@ -30,7 +27,8 @@ const MyThemeProvider = (
     return createMuiTheme(themeProps);
   }, [darkMode]);
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <ThemeProvider theme={theme} {...props} />;
-};
+}
 
 export default MyThemeProvider;

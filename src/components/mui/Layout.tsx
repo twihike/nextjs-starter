@@ -1,29 +1,28 @@
-import Link from 'next/link';
-import Router from 'next/router';
-import React from 'react';
-
 import {
   AppBar,
   Container,
   Drawer,
   Hidden,
   IconButton,
-  Link as MuiLink,
   List,
   ListItem,
   ListItemText,
-  makeStyles,
   Menu,
   MenuItem,
+  Link as MuiLink,
   Theme,
   Toolbar,
   Typography,
+  makeStyles,
 } from '@material-ui/core';
 import {
   AccountCircle,
   Brightness4,
   Menu as MenuIcon,
 } from '@material-ui/icons';
+import Link from 'next/link';
+import Router from 'next/router';
+import React from 'react';
 
 import { AuthContext } from '../../lib/auth';
 import { DarkModeContext } from '../../lib/mui';
@@ -77,9 +76,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-const Layout = ({
+function Layout({
   children,
-}: React.PropsWithChildren<{}>): React.ReactElement => {
+}: {
+  children?: React.ReactNode;
+}): React.ReactElement {
   const classes = useStyles();
 
   const [darkMode, setDarkMode] = React.useContext(DarkModeContext);
@@ -226,6 +227,6 @@ const Layout = ({
       </nav>
     </div>
   );
-};
+}
 
 export default Layout;
