@@ -241,7 +241,7 @@ jobs:
         working-directory: repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_EMAIL: example@example.com
+          GIT_EMAIL: 43339061+twihike@users.noreply.github.com
 
   e2e-test-check-diff:
     needs: e2e-test-save-snapshots
