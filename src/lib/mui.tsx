@@ -20,13 +20,15 @@ export function DarkModeProvider(props: {
     const [darkMode, setDarkMode] = React.useContext(DarkModeContext);
 
     React.useMemo(() => {
-      if (typeof window !== 'undefined') {
-        if (!darkMode.auto) {
-          return;
-        }
-        setDarkMode({ ...darkMode, isDarkMode: prefersDarkMode });
+      if (
+        !darkMode.auto ||
+        darkMode.isDarkMode === prefersDarkMode ||
+        typeof window === 'undefined'
+      ) {
+        return;
       }
-    }, [prefersDarkMode, darkMode, setDarkMode]);
+      setDarkMode({ ...darkMode, isDarkMode: prefersDarkMode });
+    }, [darkMode, prefersDarkMode, setDarkMode]);
 
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <React.Fragment {...consumerProps} />;
