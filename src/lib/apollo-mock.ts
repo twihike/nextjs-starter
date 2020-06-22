@@ -1,6 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ApolloLink } from '@apollo/client';
 import { SchemaLink } from '@apollo/link-schema';
+// import { addMocksToSchema } from '@graphql-tools/mock';
+// import {
+//   addResolversToSchema,
+//   makeExecutableSchema,
+// } from '@graphql-tools/schema';
 import { buildClientSchema } from 'graphql';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
