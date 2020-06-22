@@ -12,3 +12,5 @@ module.exports = withBundleAnalyzer({
     // USE_GRAPHQL_MOCK: process.env.NODE_ENV === 'test' ? 'true' : '',
   },
 });
+
+/* eslint-enable import/no-extraneous-dependencies */
