@@ -1,6 +1,6 @@
 # Next.js starter
 
-![CI status](https://github.com/twihike/nextjs-starter/workflows/ci/badge.svg)
+[![CI status](https://github.com/twihike/nextjs-starter/workflows/ci/badge.svg)](https://github.com/twihike/nextjs-starter/actions)
 
 Next.js framework starter repository.
 
