@@ -4,9 +4,11 @@ name: ci
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 env:
   cache-version: v20200524
@@ -17,8 +19,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+          - macos-10.15
+          - windows-2019
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -48,8 +54,10 @@ jobs:
     needs: yarn-install
     strategy:
       matrix:
-        os: [ubuntu-18.04]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -79,8 +87,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+          - macos-10.15
+          - windows-2019
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -109,9 +121,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
-        node-version: [12.x]
-        browser: [chrome, edge]
+        os:
+          - ubuntu-18.04
+          - macos-10.15
+          - windows-2019
+        node-version:
+          - 12.x
+        browser:
+          - chrome
+          - edge
         exclude:
           - os: ubuntu-18.04
             browser: edge
@@ -150,8 +168,10 @@ jobs:
     needs: e2e-test
     strategy:
       matrix:
-        os: [ubuntu-18.04]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - run: mkdir snapshots
@@ -167,9 +187,15 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
-        node-version: [12.x]
-        browser: [chrome, edge]
+        os:
+          - ubuntu-18.04
+          - macos-10.15
+          - windows-2019
+        node-version:
+          - 12.x
+        browser:
+          - chrome
+          - edge
         exclude:
           - os: ubuntu-18.04
             browser: edge
@@ -200,8 +226,10 @@ jobs:
     needs: e2e-test-merge-snapshots-2
     strategy:
       matrix:
-        os: [ubuntu-18.04]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - name: Download snapshots
@@ -247,9 +275,11 @@ jobs:
     needs: e2e-test-save-snapshots
     strategy:
       matrix:
-        os: [ubuntu-18.04]
-        node-version: [12.x]
-    runs-on: ubuntu-18.04
+        os:
+          - ubuntu-18.04
+        node-version:
+          - 12.x
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -305,8 +335,10 @@ jobs:
     needs: yarn-install
     strategy:
       matrix:
-        os: [ubuntu-18.04]
-        node-version: [12.x]
+        os:
+          - ubuntu-18.04
+        node-version:
+          - 12.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
