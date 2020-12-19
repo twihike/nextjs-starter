@@ -67,12 +67,7 @@ export function createApolloClient({
 }
 
 export function createIsomorphLink(): ApolloLink {
-  let uri: string;
-  if (typeof window === 'undefined') {
-    uri = URL_SSR;
-  } else {
-    uri = URL_CSR;
-  }
+  const uri = typeof window === 'undefined' ? URL_SSR : URL_CSR;
 
   return new HttpLink({
     uri,

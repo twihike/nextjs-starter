@@ -12,6 +12,7 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
   Head,
+  Html,
   Main,
   NextScript,
 } from 'next/document';
@@ -21,13 +22,13 @@ import React from 'react';
 class MuiDocument extends Document {
   render(): React.ReactElement {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head />
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
