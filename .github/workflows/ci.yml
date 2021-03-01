@@ -20,11 +20,11 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
           - macos-10.15
           - windows-2019
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -55,9 +55,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -88,11 +88,11 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
           - macos-10.15
           - windows-2019
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -122,16 +122,16 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
           - macos-10.15
           - windows-2019
         node-version:
-          - 12.x
+          - 14.x
         browser:
           - chrome
           - edge
         exclude:
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             browser: edge
     runs-on: ${{ matrix.os }}
     steps:
@@ -169,9 +169,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - run: mkdir snapshots
@@ -188,18 +188,18 @@ jobs:
       max-parallel: 1
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
           - macos-10.15
           - windows-2019
         node-version:
-          - 12.x
+          - 14.x
         browser:
           - chrome
           - edge
         exclude:
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             browser: edge
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - run: mkdir snapshots
       - name: Download snapshots
@@ -227,9 +227,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - name: Download snapshots
@@ -276,9 +276,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -336,9 +336,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-20.04
         node-version:
-          - 12.x
+          - 14.x
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
