@@ -63,8 +63,8 @@ MuiDocument.getInitialProps = async (
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
-  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> => {
-    return originalRenderPage({
+  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
+    originalRenderPage({
       enhanceApp: (
         App: NextComponentType<
           AppContextType<NextRouter>,
@@ -75,7 +75,6 @@ MuiDocument.getInitialProps = async (
         props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
       ): React.ReactElement => sheets.collect(<App {...props} />),
     });
-  };
   const initialProps = await Document.getInitialProps(ctx);
 
   return {

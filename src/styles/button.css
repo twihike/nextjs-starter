@@ -14,7 +14,6 @@
   @apply cursor-default;
 }
 
-
 .tk-button-contained {
   @apply bg-on-surface-state-enabled text-on-surface;
 }
@@ -27,7 +26,6 @@
   @apply bg-on-surface-state-disabled;
 }
 
-
 .tk-button-contained-primary {
   @apply bg-primary text-on-primary;
 }
@@ -35,7 +33,6 @@
 .tk-button-contained-primary:hover {
   @apply bg-primary-light;
 }
-
 
 .tk-button-circle {
   @apply px-2 py-2  rounded-full shadow-none transition-colors duration-500;
@@ -52,8 +49,12 @@
 
 .tk-button-ripple::before {
   @apply block absolute w-full h-full top-0 left-0  bg-center bg-no-repeat opacity-0 pointer-events-none;
-  content: "";
-  background-image: radial-gradient(circle, rgb(var(--color-on-surface)) 50%, transparent 51%);
+  content: '';
+  background-image: radial-gradient(
+    circle,
+    rgb(var(--color-on-surface)) 50%,
+    transparent 51%
+  );
   transform: scale(2, 2);
   transition: transform 0.5s, opacity 1s;
 }

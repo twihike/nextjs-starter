@@ -184,13 +184,11 @@ function MuiTable<D extends {}>({
                     {...row.getToggleRowSelectedProps()}
                   />
                 </TableCell>
-                {row.cells.map((cell) => {
-                  return (
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </TableCell>
-                  );
-                })}
+                {row.cells.map((cell) => (
+                  <TableCell {...cell.getCellProps()}>
+                    {cell.render('Cell')}
+                  </TableCell>
+                ))}
               </TableRow>
             );
           })}

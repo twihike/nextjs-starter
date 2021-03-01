@@ -12,7 +12,7 @@ class MuiApp extends App {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles?.parentElement) {
-      // eslint-disable-next-line unicorn/prefer-node-remove
+      // eslint-disable-next-line unicorn/prefer-dom-node-remove
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }

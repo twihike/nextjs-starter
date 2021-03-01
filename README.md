@@ -74,7 +74,6 @@ Next.js framework starter repository.
     * Prettier: <https://prettier.io/>
   * Packages
     * prettier: <https://github.com/prettier/prettier>
-    * eslint-plugin-prettier: <https://github.com/prettier/eslint-plugin-prettier>
     * eslint-config-prettier: <https://github.com/prettier/eslint-config-prettier>
 
 * Testing
@@ -188,8 +187,7 @@ yarn add -D \
 # Prettier
 yarn add -D \
   prettier \
-  eslint-config-prettier \
-  eslint-plugin-prettier
+  eslint-config-prettier
 ```
 
 Testing

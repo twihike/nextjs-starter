@@ -212,16 +212,14 @@ function Table<D extends {}>({
                       {...row.getToggleRowSelectedProps()}
                     />
                   </td>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        className="p-1  text-on-surface"
-                      >
-                        {cell.render('Cell')}
-                      </td>
-                    );
-                  })}
+                  {row.cells.map((cell) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className="p-1  text-on-surface"
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
                 </tr>
               );
             })}

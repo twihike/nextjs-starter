@@ -15,7 +15,7 @@ export function createStateContext<V>(
 
   function Provider(props: { children?: React.ReactNode }): React.ReactElement {
     const [state, setState] = React.useState(defaultValue);
-    // eslint-disable-next-line react/jsx-props-no-spreading
+    // eslint-disable-next-line react/jsx-no-constructed-context-values, react/jsx-props-no-spreading
     return <Context.Provider value={[state, setState]} {...props} />;
   }
 

@@ -33,7 +33,6 @@
   @apply w-64;
 }
 
-
 .tk-menu-nav-item {
   @apply block p-2  text-on-surface transition-colors duration-500;
 }
@@ -41,7 +40,6 @@
 .tk-menu-nav-item:hover {
   @apply bg-on-surface-state-enabled;
 }
-
 
 .tk-account-menu-checkbox {
   @apply hidden;
@@ -55,6 +53,8 @@
   @apply fixed inset-auto z-10 h-0  bg-surface text-on-surface transform scale-0 duration-100;
 }
 
-.tk-account-menu-checkbox:checked + .tk-account-menu-overlay + .tk-account-menu-nav {
+.tk-account-menu-checkbox:checked
+  + .tk-account-menu-overlay
+  + .tk-account-menu-nav {
   @apply h-auto  shadow-md scale-100;
 }
