@@ -4,6 +4,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,38 +16,6 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  version: Scalars['Int'];
-};
-
-
-export type SignInResult = {
-  __typename?: 'SignInResult';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  version: Scalars['Int'];
-  token: Scalars['String'];
-};
-
-export type Query = {
-  __typename?: 'Query';
-  users: Array<User>;
-  user: User;
-};
-
-
-export type QueryUserArgs = {
-  name: Scalars['String'];
-};
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -64,15 +33,47 @@ export type MutationSignInArgs = {
   input: SignInInput;
 };
 
+export type Query = {
+  __typename?: 'Query';
+  users: Array<User>;
+  user: User;
+};
+
+
+export type QueryUserArgs = {
+  name: Scalars['String'];
+};
+
+export type SignInInput = {
+  name: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type SignInResult = {
+  __typename?: 'SignInResult';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  version: Scalars['Int'];
+  token: Scalars['String'];
+};
+
 export type SignUpInput = {
   name: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 };
 
-export type SignInInput = {
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
   name: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  version: Scalars['Int'];
 };
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -142,10 +143,12 @@ export const GetAllUsersDocument = gql`
  * });
  */
 export function useGetAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
-        return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
       }
 export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
-          return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
         }
 export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
 export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
@@ -179,7 +182,8 @@ export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMut
  * });
  */
 export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
-        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
       }
 export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
 export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
@@ -211,7 +215,8 @@ export type SignInMutationFn = Apollo.MutationFunction<SignInMutation, SignInMut
  * });
  */
 export function useSignInMutation(baseOptions?: Apollo.MutationHookOptions<SignInMutation, SignInMutationVariables>) {
-        return Apollo.useMutation<SignInMutation, SignInMutationVariables>(SignInDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignInMutation, SignInMutationVariables>(SignInDocument, options);
       }
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
 export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;

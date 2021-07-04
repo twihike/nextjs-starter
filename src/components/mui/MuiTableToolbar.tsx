@@ -64,10 +64,8 @@ function MuiTableToolbar<D extends {}>(
     setGlobalFilter,
   } = props;
 
-  const [
-    columnToggleAnchorEl,
-    setColumnToggleAnchorEl,
-  ] = React.useState<HTMLButtonElement | null>(null);
+  const [columnToggleAnchorEl, setColumnToggleAnchorEl] =
+    React.useState<HTMLButtonElement | null>(null);
 
   const handleColumnToggleClick = (
     event: React.MouseEvent<HTMLButtonElement>,

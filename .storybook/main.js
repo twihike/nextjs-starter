@@ -1,7 +1,10 @@
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: ['storycap/register'],
-  webpackFinal: async config => {
+  // typescript: {
+  //   reactDocgen: 'none',
+  // },
+  webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: require.resolve('babel-loader'),

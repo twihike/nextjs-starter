@@ -4,7 +4,6 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { NextPage, NextPageContext } from 'next';
-import Head from 'next/head';
 import React from 'react';
 
 import { initApolloClient } from './apollo';
@@ -80,7 +79,7 @@ export default function withApollo(
       if (typeof window === 'undefined') {
         // When redirecting, the response is finished.
         // No point in continuing to render
-        if (ctx.res?.finished) {
+        if (ctx.res?.headersSent || ctx.res?.finished) {
           return pageProps;
         }
 
@@ -109,10 +108,6 @@ export default function withApollo(
             // eslint-disable-next-line no-console
             console.error('Error while running `getMarkupFromTree`', error);
           }
-
-          // getMarkupFromTree does not call componentWillUnmount
-          // head side effect therefore need to be cleared manually
-          Head.rewind();
         }
       }
 

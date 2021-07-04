@@ -65,15 +65,18 @@ MuiDocument.getInitialProps = async (
   const originalRenderPage = ctx.renderPage;
   ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
-      enhanceApp: (
-        App: NextComponentType<
-          AppContextType<NextRouter>,
-          AppInitialProps,
-          AppPropsType<NextRouter, {}>
-        >,
-      ) => (
-        props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
-      ): React.ReactElement => sheets.collect(<App {...props} />),
+      enhanceApp:
+        (
+          App: NextComponentType<
+            AppContextType<NextRouter>,
+            AppInitialProps,
+            AppPropsType<NextRouter, {}>
+          >,
+        ) =>
+        (
+          props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
+        ): React.ReactElement =>
+          sheets.collect(<App {...props} />),
     });
   const initialProps = await Document.getInitialProps(ctx);
 

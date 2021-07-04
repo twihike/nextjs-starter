@@ -103,10 +103,8 @@ function Layout({
     setDrawerOpen(!drawerOpen);
   };
 
-  const [
-    accountIconAnchorEl,
-    setAccountIconAnchorEl,
-  ] = React.useState<HTMLElement | null>(null);
+  const [accountIconAnchorEl, setAccountIconAnchorEl] =
+    React.useState<HTMLElement | null>(null);
   const handleAccountMenuOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
