@@ -16,16 +16,10 @@ export type Scalars = {
   DateTime: any;
 };
 
-
 export type Mutation = {
   __typename?: 'Mutation';
-  signUp: User;
   signIn: SignInResult;
-};
-
-
-export type MutationSignUpArgs = {
-  input: SignUpInput;
+  signUp: User;
 };
 
 
@@ -33,10 +27,15 @@ export type MutationSignInArgs = {
   input: SignInInput;
 };
 
+
+export type MutationSignUpArgs = {
+  input: SignUpInput;
+};
+
 export type Query = {
   __typename?: 'Query';
-  users: Array<User>;
   user: User;
+  users: Array<User>;
 };
 
 
@@ -51,27 +50,27 @@ export type SignInInput = {
 
 export type SignInResult = {
   __typename?: 'SignInResult';
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  token: Scalars['String'];
   updatedAt: Scalars['DateTime'];
   version: Scalars['Int'];
-  token: Scalars['String'];
 };
 
 export type SignUpInput = {
-  name: Scalars['String'];
   email: Scalars['String'];
+  name: Scalars['String'];
   password: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   version: Scalars['Int'];
 };
@@ -79,39 +78,21 @@ export type User = {
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllUsersQuery = (
-  { __typename?: 'Query' }
-  & { users: Array<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email' | 'createdAt' | 'updatedAt' | 'version'>
-  )> }
-);
+export type GetAllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, email: string, createdAt: any, updatedAt: any, version: number }> };
 
 export type SignUpMutationVariables = Exact<{
   input: SignUpInput;
 }>;
 
 
-export type SignUpMutation = (
-  { __typename?: 'Mutation' }
-  & { signUp: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email'>
-  ) }
-);
+export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'User', id: string, name: string, email: string } };
 
 export type SignInMutationVariables = Exact<{
   input: SignInInput;
 }>;
 
 
-export type SignInMutation = (
-  { __typename?: 'Mutation' }
-  & { signIn: (
-    { __typename?: 'SignInResult' }
-    & Pick<SignInResult, 'token'>
-  ) }
-);
+export type SignInMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInResult', token: string } };
 
 
 export const GetAllUsersDocument = gql`

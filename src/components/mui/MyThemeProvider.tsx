@@ -1,6 +1,5 @@
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { ThemeOptions, ThemeProvider, createTheme } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import React from 'react';
 
 import { DarkModeContext } from '../../lib/mui';
@@ -24,7 +23,7 @@ function MyThemeProvider(props: {
         paper: '#303030',
       };
     }
-    return createMuiTheme(themeProps);
+    return createTheme(themeProps);
   }, [darkMode]);
 
   // eslint-disable-next-line react/jsx-props-no-spreading

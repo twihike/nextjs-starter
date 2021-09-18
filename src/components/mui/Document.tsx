@@ -7,7 +7,7 @@ import {
   AppContextType,
   AppPropsType,
   RenderPageResult,
-} from 'next/dist/next-server/lib/utils';
+} from 'next/dist/shared/lib/utils';
 import Document, {
   DocumentContext,
   DocumentInitialProps,

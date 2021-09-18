@@ -205,7 +205,7 @@ function MuiTable<D extends {}>({
                 inputProps: { 'aria-label': 'Rows per page' },
                 native: true,
               }}
-              onChangePage={(e, newPage): void => {
+              onPageChange={(e, newPage): void => {
                 gotoPage(newPage);
               }}
               onChangeRowsPerPage={(e): void => {
