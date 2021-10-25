@@ -1,42 +1,16 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Popover,
-} from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ViewColumnIcon from '@material-ui/icons/ViewColumn';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import { Checkbox, FormControlLabel, FormGroup, Popover } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import { Column, Row } from 'react-table';
 
 import MuiTableSearch from './MuiTableSearch';
 
 /* eslint-disable @typescript-eslint/ban-types */
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1',
-  },
-}));
-
 interface MuiTableToolbarProps<D extends {}> {
   title: string;
   allColumns: Column<D>[];
@@ -53,7 +27,6 @@ interface MuiTableToolbarProps<D extends {}> {
 function MuiTableToolbar<D extends {}>(
   props: MuiTableToolbarProps<D>,
 ): React.ReactElement {
-  const classes = useToolbarStyles();
   const {
     title,
     allColumns,
@@ -82,8 +55,8 @@ function MuiTableToolbar<D extends {}>(
     : undefined;
 
   return (
-    <Toolbar className={classes.root}>
-      <Typography className={classes.title} component="h1" variant="h6">
+    <Toolbar sx={{ pl: 2, pr: 1 }}>
+      <Typography sx={{ flex: '1 1' }} component="h1" variant="h6">
         {title}
       </Typography>
 

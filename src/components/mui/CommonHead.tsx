@@ -16,6 +16,10 @@ function CommonHead({
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
         <meta name="description" content="Next.js starter" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
       </Head>
       {children}
     </>

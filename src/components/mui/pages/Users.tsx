@@ -1,17 +1,10 @@
-import { Paper, Theme, Typography, makeStyles } from '@material-ui/core';
+import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
 
 import { useGetAllUsersQuery } from '../../../graphql/generated/graphql';
 import { AuthContext } from '../../../lib/auth';
 import Layout from '../Layout';
 import MuiTable from '../MuiTable';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    flexGrow: 1,
-    marginTop: theme.spacing(2),
-  },
-}));
 
 const userTableColumns = [
   {
@@ -41,8 +34,6 @@ const userTableColumns = [
 ];
 
 function Users(): React.ReactElement {
-  const classes = useStyles();
-
   const result = useGetAllUsersQuery();
   const { loading, error, data } = result;
   const errorMessages = error
@@ -75,7 +66,7 @@ function Users(): React.ReactElement {
 
   return (
     <Layout>
-      <div className={classes.container}>
+      <Box sx={{ flexGrow: 1, mt: 2 }}>
         <Paper>
           <MuiTable
             title="Users"
@@ -87,7 +78,7 @@ function Users(): React.ReactElement {
           {error && <Typography color="error">{errorMessages}</Typography>}
           {isEdited && <Typography>Edited</Typography>}
         </Paper>
-      </div>
+      </Box>
     </Layout>
   );
 }

@@ -1,5 +1,11 @@
 import {
+  AccountCircle,
+  Brightness4,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
+import {
   AppBar,
+  Box,
   Container,
   Drawer,
   Hidden,
@@ -10,16 +16,9 @@ import {
   Menu,
   MenuItem,
   Link as MuiLink,
-  Theme,
   Toolbar,
   Typography,
-  makeStyles,
-} from '@material-ui/core';
-import {
-  AccountCircle,
-  Brightness4,
-  Menu as MenuIcon,
-} from '@material-ui/icons';
+} from '@mui/material';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
@@ -29,60 +28,11 @@ import { DarkModeContext } from '../../lib/mui';
 
 const drawerWidth = 160;
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    minHeight: '100vh',
-  },
-  appBar: {
-    [theme.breakpoints.up('sm')]: {
-      zIndex: theme.zIndex.drawer + 1,
-      // width: `calc(100% - ${drawerWidth}px)`,
-      // marginLeft: drawerWidth,
-    },
-    backgroundColor: theme.palette.background.paper,
-  },
-  menuTitle: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  nav: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-    },
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  container: {
-    flexGrow: 1,
-    width: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  main: {
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  footer: {
-    padding: theme.spacing(2),
-  },
-  toolbar: theme.mixins.toolbar,
-}));
-
 function Layout({
   children,
 }: {
   children?: React.ReactNode;
 }): React.ReactElement {
-  const classes = useStyles();
-
   const [darkMode, setDarkMode] = React.useContext(DarkModeContext);
   const handleDarkMode = (): void => {
     setDarkMode({
@@ -116,7 +66,7 @@ function Layout({
 
   const drawer: React.ReactElement = (
     <>
-      <div className={classes.toolbar} />
+      <Toolbar />
       <List>
         {[
           { text: 'Home', href: '/' },
@@ -133,12 +83,18 @@ function Layout({
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar className={classes.appBar} color="default">
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <AppBar
+        sx={{
+          bgcolor: 'background.paper',
+          zIndex: (theme) => ({ sm: theme.zIndex.drawer + 1 }),
+        }}
+        color="default"
+      >
         <Toolbar>
           <Link href="/" passHref>
             <MuiLink
-              className={classes.menuTitle}
+              sx={{ flexGrow: 1 }}
               variant="h5"
               color="textPrimary"
               underline="none"
@@ -159,7 +115,6 @@ function Layout({
           </IconButton>
           <Menu
             anchorEl={accountIconAnchorEl}
-            getContentAnchorEl={null}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={!!accountIconAnchorEl}
@@ -180,7 +135,7 @@ function Layout({
             )}
           </Menu>
           <IconButton
-            className={classes.menuButton}
+            sx={{ display: { sm: 'none' } }}
             onClick={handleDrawerOpen}
             aria-label="Menu"
             data-test-id="menu-icon"
@@ -189,41 +144,56 @@ function Layout({
           </IconButton>
         </Toolbar>
       </AppBar>
-      <nav className={classes.nav}>
-        <Hidden xsDown implementation="css">
-          <Drawer classes={{ paper: classes.drawer }} variant="permanent" open>
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-      <Container className={classes.container} maxWidth="lg">
-        <main className={classes.main}>
-          <div className={classes.toolbar} />
+      <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: 0 }}>
+        <Drawer
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+          PaperProps={{ sx: { width: drawerWidth } }}
+          variant="permanent"
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Container
+        sx={{
+          flexGrow: 1,
+          width: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+        maxWidth="lg"
+      >
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}
+        >
+          <Toolbar />
           {children}
-        </main>
-        <footer className={classes.footer}>
+        </Box>
+        <Box component="footer" sx={{ p: 2 }}>
           <Typography align="center">
             Powered by&nbsp;
             <MuiLink href="https://github.com/twihike" color="primary">
               Next.js starter
             </MuiLink>
           </Typography>
-        </footer>
+        </Box>
       </Container>
       <nav>
         <Hidden smUp implementation="css">
           <Drawer
-            classes={{ paper: classes.drawer }}
+            sx={{ display: { sm: 'none' } }}
+            PaperProps={{ sx: { width: drawerWidth, flexShrink: 0 } }}
             variant="temporary"
             anchor="right"
             open={drawerOpen}
-            onClick={handleDrawerOpen}
+            onClose={handleDrawerOpen}
           >
             {drawer}
           </Drawer>
         </Hidden>
       </nav>
-    </div>
+    </Box>
   );
 }
 

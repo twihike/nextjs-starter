@@ -1,14 +1,14 @@
-import { InputBase } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { InputBase } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableFooter from '@mui/material/TableFooter';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import React from 'react';
 import {
   Column,
@@ -208,7 +208,7 @@ function MuiTable<D extends {}>({
               onPageChange={(e, newPage): void => {
                 gotoPage(newPage);
               }}
-              onChangeRowsPerPage={(e): void => {
+              onRowsPerPageChange={(e): void => {
                 setPageSize(Number(e.target.value));
               }}
               ActionsComponent={TablePaginationActions}

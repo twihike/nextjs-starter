@@ -4,12 +4,10 @@ import {
   Container,
   Link as MuiLink,
   Paper,
-  Theme,
   Typography,
-  makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { TextField } from 'formik-material-ui';
+import { TextField } from 'formik-mui';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
@@ -19,20 +17,7 @@ import { useSignInMutation } from '../../../graphql/generated/graphql';
 import { AuthContext } from '../../../lib/auth';
 import Layout from '../Layout';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  paper: {
-    padding: theme.spacing(4),
-  },
-}));
-
 function Login(): React.ReactElement {
-  const classes = useStyles();
-
   const formSchema = yup
     .object({
       name: yup.string().required(),
@@ -69,8 +54,11 @@ function Login(): React.ReactElement {
 
   return (
     <Layout>
-      <Container className={classes.container} maxWidth="xs">
-        <Paper className={classes.paper}>
+      <Container
+        sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
+        maxWidth="xs"
+      >
+        <Paper sx={{ p: 4 }}>
           <Typography component="h1" variant="h5">
             Log in
           </Typography>

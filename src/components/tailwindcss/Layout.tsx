@@ -1,5 +1,5 @@
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';

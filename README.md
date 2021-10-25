@@ -33,7 +33,7 @@ Next.js framework starter repository.
 
 * UI Library
   * Docs
-    * Material-UI: <https://material-ui.com/>
+    * MUI: <https://mui.com/>
     * TailwindCSS: <https://tailwindcss.com/>
   * Packages
     * @material-ui: <https://github.com/mui-org/material-ui>
@@ -43,10 +43,10 @@ Next.js framework starter repository.
 * Form Validation
   * Docs
     * Formik: <https://jaredpalmer.com/formik/>
-    * Formik Material-UI: <https://stackworx.github.io/formik-material-ui/>
+    * Formik MUI: <https://stackworx.github.io/formik-mui/>
   * Packages
     * formik: <https://github.com/jaredpalmer/formik>
-    * formik-material-ui: <https://github.com/stackworx/formik-material-ui>
+    * formik-material-ui: <https://github.com/stackworx/formik-mui>
 
 * Table
   * Docs
@@ -152,11 +152,11 @@ UI
 
 ```shell
 # Material-UI
-yarn add @material-ui/core @material-ui/icons
+yarn add @mui/material @mui/icons-material
+yarn add @emotion/react @emotion/styled @emotion/cache @emotion/server 
 
 # Material-UI Formik
-yarn add formik formik-material-ui
-yarn add formik-material-ui-pickers @date-io/date-fns@1.x date-fns
+yarn add formik formik-mui
 yarn add yup
 yarn add -D @types/yup
 

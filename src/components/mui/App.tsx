@@ -1,46 +1,26 @@
-// https://github.com/mui-org/material-ui/tree/master/examples/nextjs
+// https://github.com/mui-org/material-ui/blob/master/examples/nextjs-with-typescript
 
-import App from 'next/app';
+import { EmotionCache } from '@emotion/react';
+import { AppProps } from 'next/app';
 import React from 'react';
 
 import CommonHead from './CommonHead';
 import CommonProviders from './CommonProviders';
 
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
 /* eslint-disable react/jsx-props-no-spreading */
-class MuiApp extends App {
-  componentDidMount(): void {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles?.parentElement) {
-      // eslint-disable-next-line unicorn/prefer-dom-node-remove
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }
+export default function MuiApp(props: MyAppProps): React.ReactElement {
+  const { Component, emotionCache, pageProps } = props;
 
-  render(): React.ReactElement {
-    const { Component, pageProps } = this.props;
-
-    return (
-      <CommonHead>
-        <CommonProviders>
-          <Component {...pageProps} />
-        </CommonProviders>
-      </CommonHead>
-    );
-  }
+  return (
+    <CommonHead>
+      <CommonProviders emotionCache={emotionCache}>
+        <Component {...pageProps} />
+      </CommonProviders>
+    </CommonHead>
+  );
 }
 /* eslint-enable react/jsx-props-no-spreading */
-
-export default MuiApp;
-
-// const didMountRef = React.useRef(false);
-// React.useLayoutEffect(() => {
-//   if (!didMountRef.current) {
-//     // Remove the server-side injected CSS.
-//     const jssStyles = document.querySelector('#jss-server-side');
-//     if (jssStyles?.parentElement) {
-//       jssStyles.parentElement.removeChild(jssStyles);
-//     }
-//     didMountRef.current = true;
-//   }
-// });

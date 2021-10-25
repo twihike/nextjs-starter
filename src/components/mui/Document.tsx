@@ -1,13 +1,10 @@
-// https://github.com/mui-org/material-ui/tree/master/examples/nextjs
+// https://github.com/mui-org/material-ui/blob/master/examples/nextjs-with-typescript
 
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import createCache, { EmotionCache } from '@emotion/cache';
+import createEmotionServer from '@emotion/server/create-instance';
 import { NextComponentType } from 'next';
 import { AppInitialProps } from 'next/app';
-import {
-  AppContextType,
-  AppPropsType,
-  RenderPageResult,
-} from 'next/dist/shared/lib/utils';
+import { AppContextType, AppPropsType } from 'next/dist/shared/lib/utils';
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -16,7 +13,6 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
-import { NextRouter } from 'next/router';
 import React from 'react';
 
 class MuiDocument extends Document {
@@ -33,7 +29,10 @@ class MuiDocument extends Document {
   }
 }
 
-/* eslint-disable @typescript-eslint/ban-types */
+interface MuiAppProps extends AppPropsType {
+  emotionCache?: EmotionCache;
+}
+
 /* eslint-disable react/jsx-props-no-spreading */
 MuiDocument.getInitialProps = async (
   ctx: DocumentContext,
@@ -60,36 +59,44 @@ MuiDocument.getInitialProps = async (
   // 3. app.render
   // 4. page.render
 
-  // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
-  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
+  const cache = createCache({ key: 'css' });
+  const { extractCriticalToChunks } = createEmotionServer(cache);
+
+  ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp:
-        (
-          App: NextComponentType<
-            AppContextType<NextRouter>,
-            AppInitialProps,
-            AppPropsType<NextRouter, {}>
-          >,
-        ) =>
-        (
-          props: React.PropsWithChildren<AppPropsType<NextRouter, {}>>,
-        ): React.ReactElement =>
-          sheets.collect(<App {...props} />),
+      // eslint-disable-next-line react/display-name
+      enhanceApp: (
+        App: NextComponentType<AppContextType, AppInitialProps, MuiAppProps>,
+      ) =>
+        // eslint-disable-next-line react/display-name
+        function EnhanceApp(props) {
+          return <App emotionCache={cache} {...props} />;
+        },
     });
+
   const initialProps = await Document.getInitialProps(ctx);
+  // This is important. It prevents emotion to render invalid HTML.
+  // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
+  const emotionStyles = extractCriticalToChunks(initialProps.html);
+  const emotionStyleTags = emotionStyles.styles.map((style) => (
+    <style
+      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      key={style.key}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: style.css }}
+    />
+  ));
 
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement(),
+      ...emotionStyleTags,
     ],
   };
 };
-/* eslint-enable @typescript-eslint/ban-types */
 /* eslint-enable react/jsx-props-no-spreading */
 
 export default MuiDocument;

@@ -1,46 +1,9 @@
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
+import { Box } from '@mui/material';
+import InputBase from '@mui/material/InputBase';
+import { Theme, alpha } from '@mui/material/styles';
 import React from 'react';
 import { Row } from 'react-table';
-
-const useStyles = makeStyles((theme) => ({
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing(7),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
-  },
-}));
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 interface MuiTableSearchProps<D extends {}> {
@@ -55,7 +18,6 @@ function MuiTableSearch<D extends {}>({
   preGlobalFilteredRows,
   setGlobalFilter,
 }: MuiTableSearchProps<D>): React.ReactElement {
-  const classes = useStyles();
   const count = preGlobalFilteredRows.length;
 
   // Global filter only works with pagination from the first page.
@@ -63,10 +25,33 @@ function MuiTableSearch<D extends {}>({
   // only the current page is downloaded.
 
   return (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
+    <Box
+      sx={{
+        position: 'relative',
+        borderRadius: (theme: Theme) => theme.shape.borderRadius,
+        backgroundColor: (theme: Theme) => alpha(theme.palette.grey[500], 0.15),
+        '&:hover': {
+          backgroundColor: (theme: Theme) =>
+            alpha(theme.palette.grey[500], 0.25),
+        },
+        mr: 2,
+        ml: { xs: 0, sm: 3 },
+        width: { xs: '100%', sm: 'auto' },
+      }}
+    >
+      <Box
+        sx={{
+          width: (theme: Theme) => theme.spacing(7),
+          height: '100%',
+          position: 'absolute',
+          pointerEvents: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <SearchIcon />
-      </div>
+      </Box>
       <InputBase
         value={globalFilter || ''}
         onChange={(
@@ -75,13 +60,17 @@ function MuiTableSearch<D extends {}>({
           setGlobalFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
         }}
         placeholder={`${count} records...`}
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
+        sx={{ color: 'inherit' }}
+        inputProps={{
+          'aria-label': 'Search',
+          sx: {
+            p: (theme: Theme) => theme.spacing(1, 1, 1, 7),
+            transition: (theme: Theme) => theme.transitions.create('width'),
+            width: { xs: '100%', md: 200 },
+          },
         }}
-        inputProps={{ 'aria-label': 'Search' }}
       />
-    </div>
+    </Box>
   );
 }
 

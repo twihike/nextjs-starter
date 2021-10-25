@@ -1,5 +1,5 @@
-import { ThemeOptions, ThemeProvider, createTheme } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import React from 'react';
 
 import { DarkModeContext } from '../../lib/mui';
@@ -11,7 +11,7 @@ function MyThemeProvider(props: {
   const theme = React.useMemo(() => {
     const themeProps: ThemeOptions = {
       palette: {
-        type: darkMode.isDarkMode ? 'dark' : 'light',
+        mode: darkMode.isDarkMode ? 'dark' : 'light',
         primary: {
           main: darkMode.isDarkMode ? blue[200] : blue[800],
         },
